@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.jailton.androidapptemplate"
+    namespace = "com.ifpr.MontarCurriculo"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.jailton.androidapptemplate"
+        applicationId = "com.ifpr.MontarCurriculo"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.jailton.androidapptemplate.ui.login
+package com.ifpr.MontarCurriculo.ui.login
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package com.jailton.androidapptemplate.ui.home
+package com.ifpr.MontarCurriculo.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

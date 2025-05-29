@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ifpr.MontarCurriculo.R
+import com.ifpr.MontarCurriculo.baseclasses.Item
 
 class HomeFragment : Fragment() {
 

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ifpr.MontarCurriculo.databinding.FragmentHomeBinding
 import android.util.Base64
-import android.widget.*
+import android.widget.* // Importa Button e outras classes de widget
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ifpr.MontarCurriculo.R
 import com.ifpr.MontarCurriculo.baseclasses.Item
+import android.content.Intent // Importar Intent para iniciar a próxima Activity
+import com.ifpr.MontarCurriculo.ui.curriculo.DadosPessoaisActivity // Substitua por sua Activity real
 
 class HomeFragment : Fragment() {
 
@@ -36,15 +38,27 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false) // Infla o binding
+        val root: View = binding.root // Pega a view raiz do binding
 
-        val container = view.findViewById<LinearLayout>(R.id.itemContainer)
-        carregarItensMarketplace(container)
+        val homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java) // Exemplo, pode ser diferente no seu projeto
 
-        val switch = view.findViewById<SwitchCompat>(R.id.darkModeSwitch)
+        val containerLayout = root.findViewById<LinearLayout>(R.id.itemContainer)
+        carregarItensMarketplace(containerLayout)
+
+        val switch = root.findViewById<SwitchCompat>(R.id.darkModeSwitch)
         habilitaDarkMode(switch)
 
-        return view
+        // Encontrar o novo botão pelo ID e configurar o OnClickListener
+        val buttonCriarNovoCurriculo: Button = root.findViewById(R.id.buttonCriarNovoCurriculo)
+        buttonCriarNovoCurriculo.setOnClickListener {
+            // Ação para o botão: Iniciar a Activity de criação de currículo
+            val intent = Intent(context, DadosPessoaisActivity::class.java) // Substitua 'DadosPessoaisActivity' pela Activity onde o usuário começa a criar o currículo.
+            startActivity(intent)
+        }
+
+        return root
     }
 
     override fun onDestroyView() {

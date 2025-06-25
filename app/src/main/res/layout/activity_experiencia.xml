@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333333"
+    tools:context=".ui.curriculo.ExperienciaProfissionalActivity">
+
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Experiência Profissional"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewEmpresaLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="Empresa*"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />
+
+    <EditText
+        android:id="@+id/editTextEmpresa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:background="#EEEEEE"
+        android:hint="Nome da Empresa"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmpresaLabel" />
+
+    <TextView
+        android:id="@+id/textViewCargoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="Cargo*"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmpresa" />
+
+    <EditText
+        android:id="@+id/editTextCargo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:background="#EEEEEE"
+        android:hint="Seu Cargo"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCargoLabel" />
+
+    <TextView
+        android:id="@+id/textViewPeriodoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="Período (MM/AAAA)*"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCargo" />
+
+    <EditText
+        android:id="@+id/editTextPeriodoInicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:background="#EEEEEE"
+        android:hint="Início (MM/AAAA)"
+        android:inputType="datetime"
+        android:maxLength="7"
+        android:padding="15dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTraco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPeriodoLabel" />
+
+    <TextView
+        android:id="@+id/textViewTraco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPeriodoFim"
+        app:layout_constraintEnd_toStartOf="@+id/editTextPeriodoFim"
+        app:layout_constraintStart_toEndOf="@+id/editTextPeriodoInicio"
+        app:layout_constraintTop_toTopOf="@+id/editTextPeriodoFim" />
+
+    <EditText
+        android:id="@+id/editTextPeriodoFim"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:background="#EEEEEE"
+        android:hint="Fim (MM/AAAA ou 'Atual')"
+        android:inputType="datetime"
+        android:maxLength="7"
+        android:padding="15dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTraco"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPeriodoLabel" />
+
+    <TextView
+        android:id="@+id/textViewDescricaoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="Descrição (Opcional)"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPeriodoInicio" />
+
+    <EditText
+        android:id="@+id/editTextDescricao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:background="#EEEEEE"
+        android:gravity="top|start"
+        android:hint="Descreva suas responsabilidades e conquistas"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:maxLines="6"
+        android:minLines="3"
+        android:padding="15dp"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescricaoLabel" />
+
+    <Button
+        android:id="@+id/buttonAdicionarExperiencia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#607D8B"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:padding="15dp"
+        android:text="Adicionar Mais Experiência"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonProximoExperiencia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonProximoExperiencia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="#FAF089"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:padding="15dp"
+        android:text="Próximo"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#333333"
-    tools:context=".ui.curriculo.ExperienciaProfissionalActivity">
+    tools:context=".ui.formacaoAcademica.FormacaoAcademicaActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:text="Experiência Profissional"
+            android:text="Formação Acadêmica"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -27,17 +27,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Empresa*"
+            android:text="Instituição de Ensino*"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextEmpresa"
+            android:id="@+id/editTextInstituicao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="#EEEEEE"
-            android:hint="Ex: Google Brasil"
+            android:hint="Ex: Universidade Federal do Paraná"
             android:padding="12dp"
             android:textColor="#000000"
             android:inputType="textCapWords" />
@@ -47,17 +47,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Cargo*"
+            android:text="Curso / Área*"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextCargo"
+            android:id="@+id/editTextCurso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="#EEEEEE"
-            android:hint="Ex: Desenvolvedor Android Júnior"
+            android:hint="Ex: Bacharelado em Ciência da Computação"
             android:padding="12dp"
             android:textColor="#000000"
             android:inputType="textCapSentences" />
@@ -67,65 +67,63 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Período (Ex: 01/2023 - 12/2024 ou Atual)*"
+            android:text="Período (Ex: 03/2018 - 12/2022 ou Cursando)*"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextPeriodo"
+            android:id="@+id/editTextPeriodoFormacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="#EEEEEE"
-            android:hint="MM/AAAA - MM/AAAA ou Atual"
+            android:hint="MM/AAAA - MM/AAAA ou Cursando"
             android:padding="12dp"
             android:textColor="#000000"
             android:inputType="text" />
 
         <TextView
-            android:id="@+id/textViewDescricaoLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Descrição das Atividades (opcional)"
+            android:text="Nível (Ex: Graduação, Pós-Graduação, Técnico)*"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextDescricao"
+            android:id="@+id/editTextNivel"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="#EEEEEE"
-            android:gravity="top"
-            android:hint="Liste suas principais responsabilidades e conquistas."
+            android:hint="Ex: Graduação"
             android:padding="12dp"
             android:textColor="#000000"
-            android:inputType="textMultiLine" />
+            android:inputType="textCapWords" />
 
         <Button
-            android:id="@+id/buttonAdicionarExperiencia"
+            android:id="@+id/buttonAdicionarFormacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:backgroundTint="#FAF089"
             android:fontFamily="sans-serif-condensed-medium"
             android:padding="15dp"
-            android:text="Adicionar Experiência"
+            android:text="Adicionar Formação"
             android:textColor="#000000"
             android:textSize="20sp"
             app:cornerRadius="10dp" />
 
         <Button
-            android:id="@+id/buttonFinalizarExperiencias"
+            android:id="@+id/buttonFinalizarFormacoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="#FAF089"
             android:fontFamily="sans-serif-condensed-medium"
             android:padding="15dp"
-            android:text="Finalizar Experiências"
+            android:text="Finalizar Formações"
             android:textColor="#000000"
             android:textSize="20sp"
             app:cornerRadius="10dp" />

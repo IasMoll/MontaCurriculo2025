@@ -22,11 +22,11 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
 
     // Conecta as caixas de texto e botões do XML ao código
     private lateinit var editTextInstituicao: EditText
-    private lateinit var editTextCurso: EditText // Corrigido para remover 'var' extra
-    private lateinit var editTextPeriodoFormacao: EditText // Corrigido para remover 'var' extra
-    private lateinit var editTextNivel: EditText // Corrigido para remover 'var' extra
-    private lateinit var buttonAdicionarFormacao: Button // Corrigido para remover 'var' extra
-    private lateinit var buttonFinalizarFormacoes: Button // Corrigido para remover 'var' extra
+    private lateinit var editTextCurso: EditText
+    private lateinit var editTextPeriodoFormacao: EditText
+    private lateinit var editTextNivel: EditText
+    private lateinit var buttonAdicionarFormacao: Button
+    private lateinit var buttonFinalizarFormacoes: Button
 
     // Para se comunicar com o Firebase
     private lateinit var databaseReference: DatabaseReference
@@ -38,10 +38,10 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Diz à Activity qual layout ela deve usar (o que acabamos de criar)
-        setContentView(R.layout.activity_formacao)
+        // Diz à Activity qual layout ela deve usar
+        setContentView(R.layout.activity_formacao) // Certifique-se de que este é o layout correto
 
-        // Encontra os elementos do layout pelos seus IDs (IDs do Ação 1)
+        // Encontra os elementos do layout pelos seus IDs
         editTextInstituicao = findViewById(R.id.editTextInstituicao)
         editTextCurso = findViewById(R.id.editTextCurso)
         editTextPeriodoFormacao = findViewById(R.id.editTextPeriodoFormacao)
@@ -74,11 +74,14 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
 
         // O que acontece quando os botões são clicados
         buttonAdicionarFormacao.setOnClickListener {
-            adicionarFormacao() // Chama a função para adicionar uma formação
+            // Tenta adicionar a formação. Se os campos estiverem vazios, não adiciona e mostra um Toast.
+            adicionarFormacao(isFinalizing = false)
         }
 
         buttonFinalizarFormacoes.setOnClickListener {
-            adicionarFormacao(true) // Tenta adicionar a formação atual ANTES de finalizar
+            // Tenta adicionar a formação atual ANTES de finalizar.
+            // Se os campos estiverem vazios, ela simplesmente não adicionará nada e prosseguirá.
+            adicionarFormacao(isFinalizing = true)
             navigateToNextStep() // Vai para a próxima tela
         }
     }
@@ -91,7 +94,7 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
                     // Se o currículo existir, carrega ele para nossa variável 'currentCurriculo'
                     currentCurriculo = snapshot.getValue(CurriculoModel::class.java)
                 } else {
-                    // Se não existir (algo deu errado), cria um novo CurriculoModel
+                    // Se não existir (algo deu errado ou é um novo currículo), cria um novo CurriculoModel
                     Log.w("FormacaoActivity", "Currículo não encontrado para ID: $curriculoId. Iniciando novo CurriculoModel.")
                     Toast.makeText(this@FormacaoAcademicaActivity, "Currículo não encontrado. Iniciando novo.", Toast.LENGTH_SHORT).show()
                     currentCurriculo = CurriculoModel(id = curriculoId, userId = userId)
@@ -101,12 +104,14 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 Log.e("FormacaoActivity", "Erro ao carregar currículo: ${error.message}")
                 Toast.makeText(this@FormacaoAcademicaActivity, "Erro ao carregar dados do currículo.", Toast.LENGTH_SHORT).show()
+                // Em caso de erro, ainda tentamos criar um CurriculoModel para evitar NullPointerException
                 currentCurriculo = CurriculoModel(id = curriculoId, userId = userId)
             }
         })
     }
 
     // Função para adicionar uma formação à lista do currículo
+    // isFinalizing: true se a chamada veio do botão "Finalizar", false se veio do "Adicionar Formação"
     private fun adicionarFormacao(isFinalizing: Boolean = false) {
         // Pega os textos digitados nos campos
         val instituicao = editTextInstituicao.text.toString().trim()
@@ -114,25 +119,28 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
         val periodo = editTextPeriodoFormacao.text.toString().trim()
         val nivel = editTextNivel.text.toString().trim()
 
-        // Verifica se os campos obrigatórios foram preenchidos
-        if (instituicao.isEmpty() || curso.isEmpty() || periodo.isEmpty() || nivel.isEmpty()) {
-            if (!isFinalizing) {
-                Toast.makeText(this, "Instituição, curso, período e nível são obrigatórios.", Toast.LENGTH_SHORT).show()
+        // *** Lógica para tornar a formação acadêmica não obrigatória ***
+        // Verifica se *todos* os campos de formação estão vazios
+        if (instituicao.isEmpty() && curso.isEmpty() && periodo.isEmpty() && nivel.isEmpty()) {
+            if (!isFinalizing) { // Se não estamos finalizando, avisamos que nada será adicionado
+                Toast.makeText(this, "Nenhuma informação de formação para adicionar. Preencha ou finalize.", Toast.LENGTH_SHORT).show()
             }
-            return // Sai da função se estiver faltando dados
+            // Se todos os campos estiverem vazios, não há nada para adicionar, então apenas sai da função.
+            // Isso permite que o botão "Finalizar" prossiga sem erros, mesmo com campos vazios.
+            return
         }
 
-        // Cria um novo objeto Formacao com os dados
+        // Se chegamos até aqui, significa que pelo menos um campo foi preenchido, então vamos criar a Formacao
         val novaFormacao = Formacao(
             instituicao = instituicao,
             curso = curso,
-
-
+            //periodo = periodo, // MANTENHA ESTA LINHA DESCOMENTADA
+           // nivel = nivel      // MANTENHA ESTA LINHA DESCOMENTADA
         )
 
         // Adiciona a nova formação à lista do currículo
         currentCurriculo?.let { curriculo ->
-            // Pega a lista de formações, se não existir, cria uma nova
+            // Pega a lista de formações, se não existir, cria uma nova lista mutável
             val formacoesMutavel = curriculo.formacoes?.toMutableList() ?: mutableListOf()
             formacoesMutavel.add(novaFormacao) // Adiciona a nova formação
             curriculo.formacoes = formacoesMutavel // Atualiza a lista no currículo

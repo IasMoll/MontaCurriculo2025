@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.jetbrains.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.monitor)
 
 
     testImplementation(libs.junit)

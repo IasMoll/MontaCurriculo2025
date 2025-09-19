@@ -22,7 +22,7 @@ import com.ifpr.MontarCurriculo.R
 import com.ifpr.MontarCurriculo.baseclasses.CurriculoModel // Importe o CurriculoModel correto
 import com.ifpr.MontarCurriculo.baseclasses.Experiencia
 import com.ifpr.MontarCurriculo.baseclasses.Formacao
-import com.ifpr.MontarCurriculo.ui.dadospessoais.DadosPessoaisActivity // Para o botão de edição
+import com.ifpr.MontarCurriculo.ui.curriculo.DadosPessoaisActivity // Para o botão de edição
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

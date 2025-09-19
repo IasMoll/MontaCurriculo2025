@@ -1,4 +1,4 @@
-package com.ifpr.MontarCurriculo.ui.dadospessoais // Verifique se o pacote é este ou .ui.curriculo
+package com.ifpr.MontarCurriculo.ui.curriculo // Verifique se o pacote é este ou .ui.curriculo
 
 import android.content.Intent
 import android.os.Bundle

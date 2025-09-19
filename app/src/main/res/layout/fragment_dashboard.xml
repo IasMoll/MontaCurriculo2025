@@ -15,7 +15,8 @@
         android:layout_marginTop="32dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:text="Cadastro de ..."
+        android:text="Cadastro de Informações Pessoais"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +50,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Endereço"
+
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_select_image" />

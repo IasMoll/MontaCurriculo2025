@@ -2,14 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
+
 }
 
 android {
-    namespace = "com.jailton.androidapptemplate"
+    namespace = "com.ifpr.MontarCurriculo"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.jailton.androidapptemplate"
+        applicationId = "com.ifpr.MontarCurriculo"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -60,6 +61,7 @@ dependencies {
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.jetbrains.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.monitor)
 
 
     testImplementation(libs.junit)

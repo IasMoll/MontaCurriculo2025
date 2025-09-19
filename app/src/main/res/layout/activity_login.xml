@@ -7,19 +7,29 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment_login_usuario"
     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:src="@mipmap/ic_logo"
     tools:context=".ui.login.LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@mipmap/ic_logo"
+        android:foregroundGravity="center"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/text_login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Login de Usuário"
+        android:text="Monte seu Curriculo"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <EditText
         android:id="@+id/edit_text_email"
@@ -76,4 +86,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

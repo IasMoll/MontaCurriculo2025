@@ -20,7 +20,7 @@
         android:theme="@style/Theme.AndroidAppTemplate"
         tools:targetApi="35">
 
-        //<activity
+        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">
             <intent-filter>

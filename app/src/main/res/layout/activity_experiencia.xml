@@ -165,13 +165,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDescricaoLabel" />
 
+    <!-- BOTÃO ADICIONAR MAIS EXPERIÊNCIA -->
     <Button
         android:id="@+id/buttonAdicionarExperiencia"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#607D8B"
         android:fontFamily="sans-serif-condensed-medium"
         android:padding="15dp"
@@ -179,15 +180,36 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonProximoExperiencia"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescricao" />
 
+    <!-- NOVO BOTÃO PULAR -->
+    <Button
+        android:id="@+id/buttonPularExperiencia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#9E9E9E"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:padding="15dp"
+        android:text="Pular Experiências"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdicionarExperiencia" />
+
+    <!-- BOTÃO PRÓXIMO -->
     <Button
         android:id="@+id/buttonProximoExperiencia"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="60dp"
         android:backgroundTint="#FAF089"
@@ -199,6 +221,7 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPularExperiencia" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

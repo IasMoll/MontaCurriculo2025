@@ -34,3 +34,5 @@ data class Formacao(
     var curso: String? = null,
     var anoConclusao: String? = null // Ex: "2026" ou "N/A"
 ) : Parcelable
+
+

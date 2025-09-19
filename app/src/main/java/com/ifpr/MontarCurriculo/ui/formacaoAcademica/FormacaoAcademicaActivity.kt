@@ -16,11 +16,11 @@ import com.google.firebase.database.ValueEventListener
 import com.ifpr.MontarCurriculo.R
 import com.ifpr.MontarCurriculo.baseclasses.CurriculoModel
 import com.ifpr.MontarCurriculo.baseclasses.Formacao
-import com.ifpr.MontarCurriculo.ui.curriculo.VisualizarCurriculoActivity // Próxima tela
+import com.ifpr.MontarCurriculo.ui.curriculo.VisualizarCurriculoActivity
+
 
 class FormacaoAcademicaActivity : AppCompatActivity() {
 
-    // Conecta as caixas de texto e botões do XML ao código
     private lateinit var editTextInstituicao: EditText
     private lateinit var editTextCurso: EditText
     private lateinit var editTextPeriodoFormacao: EditText
@@ -28,20 +28,17 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
     private lateinit var buttonAdicionarFormacao: Button
     private lateinit var buttonFinalizarFormacoes: Button
 
-    // Para se comunicar com o Firebase
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
-    // Para guardar os dados do currículo enquanto estamos trabalhando nele
     private var currentCurriculoId: String? = null
     private var currentCurriculo: CurriculoModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Diz à Activity qual layout ela deve usar
-        setContentView(R.layout.activity_formacao) // Certifique-se de que este é o layout correto
+        setContentView(R.layout.activity_formacao)
 
-        // Encontra os elementos do layout pelos seus IDs
+        // Inicializar views
         editTextInstituicao = findViewById(R.id.editTextInstituicao)
         editTextCurso = findViewById(R.id.editTextCurso)
         editTextPeriodoFormacao = findViewById(R.id.editTextPeriodoFormacao)
@@ -49,19 +46,19 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
         buttonAdicionarFormacao = findViewById(R.id.buttonAdicionarFormacao)
         buttonFinalizarFormacoes = findViewById(R.id.buttonFinalizarFormacoes)
 
-        // Configura o Firebase para o usuário logado
+        // Configurar Firebase
         auth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid
 
         if (userId == null) {
             Toast.makeText(this, "Usuário não logado.", Toast.LENGTH_SHORT).show()
-            finish() // Fecha a tela se não houver usuário
+            finish()
             return
         }
-        // Caminho no Firebase: users -> [ID do Usuário] -> curriculos
+
         databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userId).child("curriculos")
 
-        // Pega o ID do currículo que foi passado da tela anterior (ExperienciaProfissionalActivity)
+        // Obter ID do currículo da activity anterior
         currentCurriculoId = intent.getStringExtra("curriculoId")
         if (currentCurriculoId == null) {
             Toast.makeText(this, "Erro: ID do currículo não fornecido.", Toast.LENGTH_LONG).show()
@@ -69,95 +66,92 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
             return
         }
 
-        // Carrega os dados do currículo do Firebase (se já existirem)
+        // Carregar dados do currículo
         loadCurriculoData(userId, currentCurriculoId!!)
 
-        // O que acontece quando os botões são clicados
+        // Configurar listeners dos botões
         buttonAdicionarFormacao.setOnClickListener {
-            // Tenta adicionar a formação. Se os campos estiverem vazios, não adiciona e mostra um Toast.
             adicionarFormacao(isFinalizing = false)
         }
 
         buttonFinalizarFormacoes.setOnClickListener {
-            // Tenta adicionar a formação atual ANTES de finalizar.
-            // Se os campos estiverem vazios, ela simplesmente não adicionará nada e prosseguirá.
-            adicionarFormacao(isFinalizing = true)
-            navigateToNextStep() // Vai para a próxima tela
+            // Se tiver algo preenchido, adiciona antes de finalizar
+            if (camposPreenchidos()) {
+                adicionarFormacao(isFinalizing = true)
+            }
+            // Sempre permite finalizar (não obrigatório)
+            navigateToNextStep()
         }
     }
 
-    // Função para carregar os dados do currículo do Firebase
     private fun loadCurriculoData(userId: String, curriculoId: String) {
         databaseReference.child(curriculoId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    // Se o currículo existir, carrega ele para nossa variável 'currentCurriculo'
                     currentCurriculo = snapshot.getValue(CurriculoModel::class.java)
+                    Log.d("FormacaoActivity", "Currículo carregado: ${currentCurriculo?.id}")
                 } else {
-                    // Se não existir (algo deu errado ou é um novo currículo), cria um novo CurriculoModel
-                    Log.w("FormacaoActivity", "Currículo não encontrado para ID: $curriculoId. Iniciando novo CurriculoModel.")
-                    Toast.makeText(this@FormacaoAcademicaActivity, "Currículo não encontrado. Iniciando novo.", Toast.LENGTH_SHORT).show()
+                    Log.w("FormacaoActivity", "Currículo não encontrado para ID: $curriculoId. Criando novo.")
                     currentCurriculo = CurriculoModel(id = curriculoId, userId = userId)
+                    // Salvar o novo currículo no Firebase
+                    saveCurriculoToFirebase(currentCurriculo!!)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("FormacaoActivity", "Erro ao carregar currículo: ${error.message}")
                 Toast.makeText(this@FormacaoAcademicaActivity, "Erro ao carregar dados do currículo.", Toast.LENGTH_SHORT).show()
-                // Em caso de erro, ainda tentamos criar um CurriculoModel para evitar NullPointerException
                 currentCurriculo = CurriculoModel(id = curriculoId, userId = userId)
             }
         })
     }
 
-    // Função para adicionar uma formação à lista do currículo
-    // isFinalizing: true se a chamada veio do botão "Finalizar", false se veio do "Adicionar Formação"
-    private fun adicionarFormacao(isFinalizing: Boolean = false) {
-        // Pega os textos digitados nos campos
+    private fun camposPreenchidos(): Boolean {
         val instituicao = editTextInstituicao.text.toString().trim()
         val curso = editTextCurso.text.toString().trim()
         val periodo = editTextPeriodoFormacao.text.toString().trim()
         val nivel = editTextNivel.text.toString().trim()
 
-        // *** Lógica para tornar a formação acadêmica não obrigatória ***
-        // Verifica se *todos* os campos de formação estão vazios
+        return instituicao.isNotEmpty() || curso.isNotEmpty() || periodo.isNotEmpty() || nivel.isNotEmpty()
+    }
+
+    private fun adicionarFormacao(isFinalizing: Boolean = false) {
+        val instituicao = editTextInstituicao.text.toString().trim()
+        val curso = editTextCurso.text.toString().trim()
+        val periodo = editTextPeriodoFormacao.text.toString().trim()
+        val nivel = editTextNivel.text.toString().trim()
+
+        // Se todos os campos estão vazios, não adiciona nada (mas também não mostra erro)
         if (instituicao.isEmpty() && curso.isEmpty() && periodo.isEmpty() && nivel.isEmpty()) {
-            if (!isFinalizing) { // Se não estamos finalizando, avisamos que nada será adicionado
-                Toast.makeText(this, "Nenhuma informação de formação para adicionar. Preencha ou finalize.", Toast.LENGTH_SHORT).show()
-            }
-            // Se todos os campos estiverem vazios, não há nada para adicionar, então apenas sai da função.
-            // Isso permite que o botão "Finalizar" prossiga sem erros, mesmo com campos vazios.
             return
         }
 
-        // Se chegamos até aqui, significa que pelo menos um campo foi preenchido, então vamos criar a Formacao
+        // Criar nova formação
         val novaFormacao = Formacao(
-            instituicao = instituicao,
-            curso = curso,
-            //periodo = periodo, // MANTENHA ESTA LINHA DESCOMENTADA
-           // nivel = nivel      // MANTENHA ESTA LINHA DESCOMENTADA
+            instituicao = if (instituicao.isNotEmpty()) instituicao else null,
+            curso = if (curso.isNotEmpty()) curso else null,
+            //periodo = if (periodo.isNotEmpty()) periodo else null,
+            //nivel = if (nivel.isNotEmpty()) nivel else null
         )
 
-        // Adiciona a nova formação à lista do currículo
         currentCurriculo?.let { curriculo ->
-            // Pega a lista de formações, se não existir, cria uma nova lista mutável
+            // Adicionar à lista de formações
             val formacoesMutavel = curriculo.formacoes?.toMutableList() ?: mutableListOf()
-            formacoesMutavel.add(novaFormacao) // Adiciona a nova formação
-            curriculo.formacoes = formacoesMutavel // Atualiza a lista no currículo
+            formacoesMutavel.add(novaFormacao)
+            curriculo.formacoes = formacoesMutavel
 
-            // Limpa os campos da tela para o usuário poder adicionar outra formação
+            // Limpar campos e mostrar feedback
             clearInputFields()
-            Toast.makeText(this, "Formação adicionada! Adicione mais ou finalize.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Formação adicionada com sucesso!", Toast.LENGTH_SHORT).show()
 
-            // Salva o currículo atualizado no Firebase
+            // Salvar no Firebase
             saveCurriculoToFirebase(curriculo)
 
         } ?: run {
-            Toast.makeText(this, "Erro: Currículo não disponível para adicionar formação.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Erro: Currículo não disponível.", Toast.LENGTH_LONG).show()
         }
     }
 
-    // Função para limpar os campos após adicionar uma formação
     private fun clearInputFields() {
         editTextInstituicao.text.clear()
         editTextCurso.text.clear()
@@ -165,25 +159,23 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
         editTextNivel.text.clear()
     }
 
-    // Função para salvar o currículo atualizado no Firebase
     private fun saveCurriculoToFirebase(curriculo: CurriculoModel) {
         currentCurriculoId?.let { id ->
-            databaseReference.child(id).setValue(curriculo) // Salva o objeto completo
+            databaseReference.child(id).setValue(curriculo)
                 .addOnSuccessListener {
-                    Log.d("FormacaoActivity", "Currículo atualizado no Firebase com nova formação.")
+                    Log.d("FormacaoActivity", "Currículo salvo no Firebase com sucesso.")
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Erro ao salvar formação: ${e.message}", Toast.LENGTH_LONG).show()
-                    Log.e("FormacaoActivity", "Erro ao salvar formação: ${e.message}")
+                    Toast.makeText(this, "Erro ao salvar: ${e.message}", Toast.LENGTH_LONG).show()
+                    Log.e("FormacaoActivity", "Erro ao salvar currículo: ${e.message}")
                 }
         }
     }
 
-    // Função para ir para a próxima tela (VisualizarCurriculoActivity)
     private fun navigateToNextStep() {
-        val intent = Intent(this, VisualizarCurriculoActivity::class.java) // Diz para qual tela ir
-        intent.putExtra("curriculoId", currentCurriculoId) // Passa o ID do currículo adiante
-        startActivity(intent) // Inicia a próxima tela
-        finish() // Fecha a tela atual para não voltar para ela
+        val intent = Intent(this, VisualizarCurriculoActivity::class.java)
+        intent.putExtra("curriculoId", currentCurriculoId)
+        startActivity(intent)
+        finish()
     }
 }

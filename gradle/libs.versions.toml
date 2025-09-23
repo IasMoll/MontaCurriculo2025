@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2"
+agp = "8.9.2"
 firebaseBom = "33.10.0"
 glide = "4.16.0"
 googleServices = "4.4.2"
@@ -26,6 +26,7 @@ playServicesAuth = "21.3.0"
 playServicesLocation = "21.3.0"
 firebaseFirestoreKtx = "25.1.4"
 firebaseCrashlyticsBuildtools = "3.0.3"
+monitor = "1.7.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -55,6 +56,7 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

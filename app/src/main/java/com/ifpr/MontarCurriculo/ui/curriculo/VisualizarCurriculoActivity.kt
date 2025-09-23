@@ -22,7 +22,7 @@ import com.ifpr.MontarCurriculo.R
 import com.ifpr.MontarCurriculo.baseclasses.CurriculoModel // Importe o CurriculoModel correto
 import com.ifpr.MontarCurriculo.baseclasses.Experiencia
 import com.ifpr.MontarCurriculo.baseclasses.Formacao
-import com.ifpr.MontarCurriculo.ui.dadospessoais.DadosPessoaisActivity // Para o botão de edição
+import com.ifpr.MontarCurriculo.ui.curriculo.DadosPessoaisActivity // Para o botão de edição
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -56,17 +56,17 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_visualizar_curriculo) // Garante que está usando o layout correto
 
         // Inicializa as views com os IDs CORRETOS do activity_visualizar_curriculo.xml
-        textViewNomeCompleto = findViewById(R.id.textViewNomeCompleto)
-        textViewIdade = findViewById(R.id.textViewIdade)
-        textViewEstadoCivil = findViewById(R.id.textViewEstadoCivil)
-        textViewProfissao = findViewById(R.id.textViewProfissao)
-        textViewObjetivo = findViewById(R.id.textViewObjetivo)
-        textViewEmail = findViewById(R.id.textViewEmail)
-        textViewTelefone = findViewById(R.id.textViewTelefone)
-        textViewEndereco = findViewById(R.id.textViewEndereco)
-        layoutExperiencias = findViewById(R.id.layoutExperiencias) // O LinearLayout para experiências
-        layoutFormacoes = findViewById(R.id.layoutFormacoes)     // O LinearLayout para formações
-        buttonGerarPDF = findViewById(R.id.buttonGerarPDF)
+        //textViewNomeCompleto = findViewById(R.id.textViewNomeCompleto)
+       // textViewIdade = findViewById(R.id.textViewIdade)
+       // textViewEstadoCivil = findViewById(R.id.textViewEstadoCivil)
+       // textViewProfissao = findViewById(R.id.textViewProfissao)
+        //textViewObjetivo = findViewById(R.id.textViewObjetivo)
+        //textViewEmail = findViewById(R.id.textViewEmail)
+        //textViewTelefone = findViewById(R.id.textViewTelefone)
+       // textViewEndereco = findViewById(R.id.textViewEndereco)
+       // layoutExperiencias = findViewById(R.id.layoutExperiencias) // O LinearLayout para experiências
+      //  layoutFormacoes = findViewById(R.id.layoutFormacoes)     // O LinearLayout para formações
+      //  buttonGerarPDF = findViewById(R.id.buttonGerarPDF)
 
 
         auth = FirebaseAuth.getInstance()
@@ -139,9 +139,9 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         // Exibir Dados Pessoais
         textViewNomeCompleto.text = "Nome: ${curriculo.nomeCompleto ?: "Não informado"}"
         textViewIdade.text = "Idade: ${curriculo.idade?.toString() ?: "Não informado"}"
-        textViewNacionalidade.text = "Nacionalidade: ${curriculo.nacionalidade ?: "Não informado"}"
-        textViewEstadoCivil.text = "Estado Civil: ${curriculo.estadoCivil ?: "Não informado"}"
-        textViewProfissao.text = "Profissão: ${curriculo.profissao ?: "Não informado"}"
+       //// textViewNacionalidade.text = "Nacionalidade: ${curriculo.nacionalidade ?: "Não informado"}"
+       //// textViewEstadoCivil.text = "Estado Civil: ${curriculo.estadoCivil ?: "Não informado"}"
+       // textViewProfissao.text = "Profissão: ${curriculo.profissao ?: "Não informado"}"
         textViewObjetivo.text = "Objetivo: ${curriculo.objetivoProfissional ?: "Não informado"}"
 
         // Exibir Contato
@@ -157,7 +157,7 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         if (curriculo.experiencias.isNullOrEmpty()) {
             val tv = TextView(this)
             tv.text = "Nenhuma experiência profissional cadastrada."
-            tv.setTextColor(ContextCompat.getColor(this, R.color.white)) // Use ContextCompat
+            //tv.setTextColor(ContextCompat.getColor(this, R.color.white)) // Use ContextCompat
             layoutExperiencias.addView(tv)
         } else {
             curriculo.experiencias?.forEach { experiencia ->
@@ -169,7 +169,7 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         if (curriculo.formacoes.isNullOrEmpty()) {
             val tv = TextView(this)
             tv.text = "Nenhuma formação acadêmica cadastrada."
-            tv.setTextColor(ContextCompat.getColor(this, R.color.white)) // Use ContextCompat
+           // tv.setTextColor(ContextCompat.getColor(this, R.color.white)) // Use ContextCompat
             layoutFormacoes.addView(tv)
         } else {
             curriculo.formacoes?.forEach { formacao ->
@@ -187,7 +187,7 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
             Período: ${experiencia.periodo}
             Descrição: ${experiencia.descricao ?: "N/A"}
         """.trimIndent()
-        tv.setTextColor(ContextCompat.getColor(this, R.color.white))
+       // tv.setTextColor(ContextCompat.getColor(this, R.color.white))
         tv.textSize = 14f // Use 'f' para float
         tv.setPadding(0, 8, 0, 8)
         layoutExperiencias.addView(tv)
@@ -199,7 +199,7 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         ).apply {
             setMargins(0, 8, 0, 8)
         }
-        divider.setBackgroundColor(ContextCompat.getColor(this, R.color.gray)) // Use ContextCompat
+        //divider.setBackgroundColor(ContextCompat.getColor(this, R.color.gray)) // Use ContextCompat
         layoutExperiencias.addView(divider)
     }
 
@@ -209,10 +209,9 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         tv.text = """
             Instituição: ${formacao.instituicao}
             Curso: ${formacao.curso}
-            Período: ${formacao.periodo}
-            Nível: ${formacao.nivel}
+          
         """.trimIndent()
-        tv.setTextColor(ContextCompat.getColor(this, R.color.white))
+       // tv.setTextColor(ContextCompat.getColor(this, R.color.white))
         tv.textSize = 14f // Use 'f' para float
         tv.setPadding(0, 8, 0, 8)
         layoutFormacoes.addView(tv)
@@ -224,7 +223,7 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         ).apply {
             setMargins(0, 8, 0, 8)
         }
-        divider.setBackgroundColor(ContextCompat.getColor(this, R.color.gray)) // Use ContextCompat
+       // divider.setBackgroundColor(ContextCompat.getColor(this, R.color.gray)) // Use ContextCompat
         layoutFormacoes.addView(divider)
     }
 
@@ -262,9 +261,9 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
         yPos += 20f
         canvas.drawText("Idade: ${curriculo.idade?.toString() ?: "N/A"}", 40f, yPos, paint)
         yPos += 20f
-        canvas.drawText("Estado Civil: ${curriculo.estadoCivil ?: "N/A"}", 40f, yPos, paint)
+       // canvas.drawText("Estado Civil: ${curriculo.estadoCivil ?: "N/A"}", 40f, yPos, paint)
         yPos += 20f
-        canvas.drawText("Profissão: ${curriculo.profissao ?: "N/A"}", 40f, yPos, paint)
+       // canvas.drawText("Profissão: ${curriculo.profissao ?: "N/A"}", 40f, yPos, paint)
         yPos += 20f
         canvas.drawText("Objetivo: ${curriculo.objetivoProfissional ?: "N/A"}", 40f, yPos, paint)
         yPos += 30f
@@ -281,7 +280,7 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
                     pdfDocument.finishPage(page)
                     val newPageInfo = PdfDocument.PageInfo.Builder(595, 842, pdfDocument.pages.size + 1).create()
                     val newPage = pdfDocument.startPage(newPageInfo)
-                    canvas.set(newPage.canvas) // Redefine o canvas para a nova página
+                   // canvas.set(newPage.canvas) // Redefine o canvas para a nova página
                     yPos = 40f // Reinicia a posição Y
                 }
                 paint.textSize = 14f
@@ -320,7 +319,7 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
                     pdfDocument.finishPage(page)
                     val newPageInfo = PdfDocument.PageInfo.Builder(595, 842, pdfDocument.pages.size + 1).create()
                     val newPage = pdfDocument.startPage(newPageInfo)
-                    canvas.set(newPage.canvas) // Redefine o canvas para a nova página
+                    //canvas.set(newPage.canvas) // Redefine o canvas para a nova página
                     yPos = 40f // Reinicia a posição Y
                 }
                 paint.textSize = 14f
@@ -330,9 +329,9 @@ class VisualizarCurriculoActivity : AppCompatActivity() {
                 paint.isFakeBoldText = false
                 canvas.drawText("Curso: ${form.curso ?: "N/A"}", 80f, yPos, paint)
                 yPos += 20f
-                canvas.drawText("Período: ${form.periodo ?: "N/A"}", 80f, yPos, paint)
+                //canvas.drawText("Período: ${form.periodo ?: "N/A"}", 80f, yPos, paint)
                 yPos += 20f
-                canvas.drawText("Nível: ${form.nivel ?: "N/A"}", 80f, yPos, paint)
+               // canvas.drawText("Nível: ${form.nivel ?: "N/A"}", 80f, yPos, paint)
                 yPos += 15f // Espaço entre formações
             }
         } else {

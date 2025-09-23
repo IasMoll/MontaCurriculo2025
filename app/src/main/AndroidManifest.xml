@@ -33,8 +33,8 @@
 
         <activity android:name=".ui.usuario.CadastroUsuarioActivity" android:exported="false" />
 
-        <activity android:name=".ui.dadospessoais.DadosPessoaisActivity" android:exported="false" />
-        <activity android:name=".ui.contato.ContatoActivity" android:exported="false" />
+        <activity android:name=".ui.curriculo.DadosPessoaisActivity" android:exported="false" />
+        <activity android:name=".ui.curriculo.ContatoActivity" android:exported="false" />
         <activity android:name=".ui.curriculo.ExperienciaProfissionalActivity" android:exported="false" />
         <activity android:name=".ui.formacaoAcademica.FormacaoAcademicaActivity" android:exported="false" /> <activity android:name=".ui.curriculo.VisualizarCurriculoActivity" android:exported="false" />
 

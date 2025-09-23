@@ -28,37 +28,37 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp" />
 
-        <View style="@style/Divider"/>
+<!--        <View style="@style/Divider"/>-->
 
-        <TextView
-            style="@style/SessaoTitulo"
-            android:text="Objetivo Profissional" /> <TextView
-        style="@style/SessaoTexto"
-        android:id="@+id/textObjetivo"
-        android:text="Busco oportunidade como auxiliar administrativo para aplicar meus conhecimentos e habilidades, contribuindo para o crescimento da empresa e desenvolvendo minha carreira profissional." /> <View style="@style/Divider"/>
+<!--        <TextView-->
+<!--            style="@style/SessaoTitulo"-->
+<!--            android:text="Objetivo Profissional" /> <TextView-->
+<!--        style="@style/SessaoTexto"-->
+<!--        android:id="@+id/textObjetivo"-->
+<!--        android:text="Busco oportunidade como auxiliar administrativo para aplicar meus conhecimentos e habilidades, contribuindo para o crescimento da empresa e desenvolvendo minha carreira profissional." /> <View style="@style/Divider"/>-->
 
-        <TextView
-            style="@style/SessaoTitulo"
-            android:text="Experiência" /> <TextView
-        style="@style/SessaoTexto"
-        android:id="@+id/textExperiencia"
-        android:text="Empresa: Plantar S/A\nPeríodo: Junho/2024 - Atualmente (4 meses)\n\nPrincipais atividades:\n• Emissão e organização de notas fiscais\n• Atendimento e suporte ao cliente\n• Atendimento telefônico e direcionamento de chamadas\n• Organização de documentos e arquivos\n• Apoio em tarefas administrativas gerais" /> <View style="@style/Divider"/>
+<!--        <TextView-->
+<!--            style="@style/SessaoTitulo"-->
+<!--            android:text="Experiência" /> <TextView-->
+<!--        style="@style/SessaoTexto"-->
+<!--        android:id="@+id/textExperiencia"-->
+<!--        android:text="Empresa: Plantar S/A\nPeríodo: Junho/2024 - Atualmente (4 meses)\n\nPrincipais atividades:\n• Emissão e organização de notas fiscais\n• Atendimento e suporte ao cliente\n• Atendimento telefônico e direcionamento de chamadas\n• Organização de documentos e arquivos\n• Apoio em tarefas administrativas gerais" /> <View style="@style/Divider"/>-->
 
-        <TextView
-            style="@style/SessaoTitulo"
-            android:text="Formação Acadêmica" /> <TextView
-        style="@style/SessaoTexto"
-        android:id="@+id/textFormacao"
-        android:text="Curso: Análise e Desenvolvimento de Sistemas\nInstituição: IFPR - Instituto Federal do Paraná\nPeríodo: 2023 - 2026\nStatus: Cursando" /> <Button
-        android:id="@+id/btnCompartilhar"
-        android:text="Compartilhar PDF"
-        android:textStyle="bold"
-        android:backgroundTint="#FDFD70"
-        android:textColor="#333333"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="12dp"
-        android:layout_marginTop="24dp"
-        android:elevation="4dp" />
+<!--        <TextView-->
+<!--            style="@style/SessaoTitulo"-->
+<!--            android:text="Formação Acadêmica" /> <TextView-->
+<!--        style="@style/SessaoTexto"-->
+<!--        android:id="@+id/textFormacao"-->
+<!--        android:text="Curso: Análise e Desenvolvimento de Sistemas\nInstituição: IFPR - Instituto Federal do Paraná\nPeríodo: 2023 - 2026\nStatus: Cursando" /> <Button-->
+<!--        android:id="@+id/btnCompartilhar"-->
+<!--        android:text="Compartilhar PDF"-->
+<!--        android:textStyle="bold"-->
+<!--        android:backgroundTint="#FDFD70"-->
+<!--        android:textColor="#333333"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingVertical="12dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:elevation="4dp" />-->
     </LinearLayout>
 </ScrollView>

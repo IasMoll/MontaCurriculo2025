@@ -112,7 +112,9 @@ class FormacaoAcademicaActivity : AppCompatActivity() {
         val periodo = editTextPeriodoFormacao.text.toString().trim()
         val nivel = editTextNivel.text.toString().trim()
 
-        return instituicao.isNotEmpty() || curso.isNotEmpty() || periodo.isNotEmpty() || nivel.isNotEmpty()
+        
+        return true
+      //  return instituicao.isNotEmpty() || curso.isNotEmpty() || periodo.isNotEmpty() || nivel.isNotEmpty()
     }
 
     private fun adicionarFormacao(isFinalizing: Boolean = false) {
